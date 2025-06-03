@@ -1,6 +1,6 @@
 
 import { Card, CardContent } from "@/components/ui/card";
-import { Clock, DollarSign, Globe, TrendingUp } from "lucide-react";
+import { Clock, Globe, Heart, Shield } from "lucide-react";
 
 const Benefits = () => {
   const benefits = [
@@ -12,13 +12,6 @@ const Benefits = () => {
       statLabel: "Time Saved"
     },
     {
-      icon: <DollarSign className="h-12 w-12" />,
-      title: "Reduce Costs",
-      description: "Lower bandwidth costs and improve site performance with optimized images.",
-      stat: "60%",
-      statLabel: "Cost Reduction"
-    },
-    {
       icon: <Globe className="h-12 w-12" />,
       title: "Faster Websites",
       description: "Smaller image files mean faster loading times and better user experience.",
@@ -26,11 +19,18 @@ const Benefits = () => {
       statLabel: "Faster Loading"
     },
     {
-      icon: <TrendingUp className="h-12 w-12" />,
-      title: "Better SEO",
-      description: "Google loves fast websites. Optimized images improve your search rankings.",
-      stat: "40%",
-      statLabel: "SEO Improvement"
+      icon: <Heart className="h-12 w-12" />,
+      title: "Easy to Use",
+      description: "Intuitive interface that anyone can master in minutes. No technical skills required.",
+      stat: "100%",
+      statLabel: "User Friendly"
+    },
+    {
+      icon: <Shield className="h-12 w-12" />,
+      title: "Secure",
+      description: "We never store any of your data. All processing happens locally in your browser.",
+      stat: "0%",
+      statLabel: "Data Stored"
     }
   ];
 

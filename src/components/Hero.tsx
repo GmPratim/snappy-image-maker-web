@@ -31,13 +31,10 @@ const Hero = () => {
             and optimize your images in seconds.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+          <div className="flex justify-center mb-12">
             <Button size="lg" className="bg-white text-purple-900 hover:bg-purple-50 text-lg px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-105 shadow-2xl">
               <Upload className="mr-2 h-5 w-5" />
               Start Resizing Free
-            </Button>
-            <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-purple-900 text-lg px-8 py-4 rounded-full font-semibold transition-all duration-300">
-              Watch Demo
             </Button>
           </div>
 

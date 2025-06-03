@@ -1,6 +1,6 @@
 
 import { Card, CardContent } from "@/components/ui/card";
-import { Crop, Download, Palette, Settings, Smartphone, Users } from "lucide-react";
+import { Crop, Palette, Smartphone } from "lucide-react";
 
 const Features = () => {
   const features = [
@@ -10,29 +10,14 @@ const Features = () => {
       description: "Intelligent algorithms maintain image quality while reducing file size. Perfect for web optimization."
     },
     {
-      icon: <Download className="h-8 w-8" />,
-      title: "Batch Processing",
-      description: "Upload and resize hundreds of photos at once. Save time with our powerful batch processing tools."
-    },
-    {
       icon: <Palette className="h-8 w-8" />,
       title: "Format Support",
       description: "Support for all major formats including JPEG, PNG, WebP, and AVIF for maximum compatibility."
     },
     {
-      icon: <Settings className="h-8 w-8" />,
-      title: "Custom Presets",
-      description: "Create and save custom resize presets for social media, websites, and print requirements."
-    },
-    {
       icon: <Smartphone className="h-8 w-8" />,
       title: "Mobile Optimized",
       description: "Resize images on any device. Our responsive design works perfectly on desktop, tablet, and mobile."
-    },
-    {
-      icon: <Users className="h-8 w-8" />,
-      title: "Team Collaboration",
-      description: "Share presets and collaborate with team members. Perfect for agencies and creative teams."
     }
   ];
 
