@@ -1,8 +1,10 @@
-
 import { Button } from "@/components/ui/button";
 import { Upload, Zap, Shield } from "lucide-react";
+import ImageResizer from "./ImageResizer";
+import { useState } from "react";
 
 const Hero = () => {
+  const [showResizer, setShowResizer] = useState(false);
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
       {/* Animated background effects */}
@@ -36,7 +38,7 @@ const Hero = () => {
           </p>
           
           <div className="flex justify-center mb-12">
-            <Button size="lg" className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white text-lg px-12 py-6 rounded-2xl font-semibold transition-all duration-300 hover:scale-105 shadow-2xl border-0">
+            <Button size="lg" className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white text-lg px-12 py-6 rounded-2xl font-semibold transition-all duration-300 hover:scale-105 shadow-2xl border-0" onClick={() => setShowResizer(true)}>
               <Upload className="mr-3 h-6 w-6" />
               Start Resizing Free
             </Button>
@@ -67,6 +69,7 @@ const Hero = () => {
           </div>
         </div>
       </div>
+      {showResizer && <ImageResizer onClose={() => setShowResizer(false)} />}
     </section>
   );
 };
