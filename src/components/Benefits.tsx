@@ -35,38 +35,38 @@ const Benefits = () => {
   ];
 
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-gradient-to-b from-slate-800 to-slate-900">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent mb-4">
             Why Choose PhotoResize?
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-slate-400 max-w-2xl mx-auto">
             Join thousands of professionals who trust us with their image optimization needs
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {benefits.map((benefit, index) => (
-            <Card key={index} className="text-center border-0 shadow-lg hover:shadow-xl transition-all duration-300 group">
+            <Card key={index} className="text-center border-0 bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300 group">
               <CardContent className="p-8">
-                <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                <div className="w-20 h-20 bg-gradient-to-br from-cyan-500/20 to-purple-500/20 rounded-2xl flex items-center justify-center text-cyan-400 mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 border border-cyan-500/20">
                   {benefit.icon}
                 </div>
                 
                 <div className="mb-4">
-                  <div className="text-4xl font-bold text-purple-600 mb-1">
+                  <div className="text-4xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-1">
                     {benefit.stat}
                   </div>
-                  <div className="text-sm text-gray-500 uppercase tracking-wide">
+                  <div className="text-sm text-slate-500 uppercase tracking-wide">
                     {benefit.statLabel}
                   </div>
                 </div>
                 
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                <h3 className="text-xl font-semibold text-white mb-3">
                   {benefit.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-slate-400 leading-relaxed">
                   {benefit.description}
                 </p>
               </CardContent>
