@@ -32,8 +32,7 @@ const Hero = () => {
           </h1>
           
           <p className="text-xl md:text-2xl mb-8 text-slate-300 leading-relaxed max-w-3xl mx-auto">
-            Professional photo resizing made simple. Batch process, maintain quality, 
-            and optimize your images in seconds with our advanced AI-powered tools.
+            Professional photo resizing made simple. Maintain quality and optimize your images in seconds.
           </p>
           
           <div className="flex justify-center mb-12">
@@ -63,7 +62,7 @@ const Hero = () => {
               <div className="w-16 h-16 bg-gradient-to-br from-pink-500/20 to-purple-500/20 rounded-2xl flex items-center justify-center backdrop-blur-sm border border-pink-500/20">
                 <Upload className="h-8 w-8 text-pink-400" />
               </div>
-              <span className="text-slate-300 font-medium text-lg">Batch Processing</span>
+              <span className="text-slate-300 font-medium text-lg">Easy Upload</span>
             </div>
           </div>
         </div>
