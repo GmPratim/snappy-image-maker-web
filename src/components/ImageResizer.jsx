@@ -20,6 +20,7 @@ const ImageResizer = ({ onClose }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const inputRef = useRef();
+  const originalImageDimensions = useRef(null);
 
   const handleDrop = (e) => {
     e.preventDefault();
@@ -42,6 +43,17 @@ const ImageResizer = ({ onClose }) => {
     setFile(file);
     setPreview(URL.createObjectURL(file));
     setResizedFile(null);
+
+    // Read dimensions to use for scaling later
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        originalImageDimensions.current = { width: img.width, height: img.height };
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
   };
 
   const handleInputChange = (e) => {
@@ -49,54 +61,45 @@ const ImageResizer = ({ onClose }) => {
   };
 
   const handleResize = async () => {
-    setError('');
+    setError(''); // Clear previous errors
     if (!file) {
       setError('Please upload an image.');
       return;
     }
-    if (!targetSize || isNaN(targetSize) || targetSize < 5) {
-      setError('Enter a valid target size (min 5 KB).');
+    if (!targetSize || isNaN(targetSize) || parseInt(targetSize, 10) < 1) {
+      setError('Enter a valid target size (min 1 KB).'); // Adjusted min size check to 1 KB
       return;
     }
     setLoading(true);
 
+    const formData = new FormData();
+    formData.append('image', file);
+    formData.append('targetSizeKB', targetSize);
+
     try {
-      let minQuality = 0.01;
-      let maxQuality = 0.95;
-      let bestFile = null;
-      let bestDiff = Infinity;
-      let targetBytes = targetSize * 1024;
-      let options = {
-        maxWidthOrHeight: 2000,
-        useWebWorker: true,
-        fileType: file.type,
-      };
-      let iterations = 0;
-      let maxIterations = 12;
-      while (minQuality <= maxQuality && iterations < maxIterations) {
-        let midQuality = (minQuality + maxQuality) / 2;
-        options.initialQuality = midQuality;
-        options.maxSizeMB = targetSize / 1024;
-        const compressedFile = await imageCompression(file, options);
-        const diff = Math.abs(compressedFile.size - targetBytes);
-        if (diff < bestDiff) {
-          bestDiff = diff;
-          bestFile = compressedFile;
-        }
-        if (compressedFile.size > targetBytes) {
-          maxQuality = midQuality - 0.01;
-        } else if (compressedFile.size < targetBytes) {
-          minQuality = midQuality + 0.01;
-        } else {
-          // Exact match
-          bestFile = compressedFile;
-          break;
-        }
-        iterations++;
+      // Send image and target size to the backend for resizing
+      const response = await fetch('http://localhost:5000/api/resize', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        // Handle server errors
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Server error during resizing.');
       }
-      setResizedFile(bestFile);
+
+      // Server sent back the resized image buffer
+      const resizedImageBlob = await response.blob();
+      // Create a File-like object from the Blob to store size
+      const resizedFileObject = new File([resizedImageBlob], file.name, { type: resizedImageBlob.type });
+
+      setResizedFile(resizedFileObject);
+      // No quality warning needed here, as server handles accuracy
+
     } catch (err) {
-      setError('Failed to resize image.');
+      console.error('Resize request error:', err);
+      setError(err.message || 'Failed to resize image.');
     }
     setLoading(false);
   };
@@ -124,7 +127,6 @@ const ImageResizer = ({ onClose }) => {
           onClick={() => inputRef.current.click()}
           onDrop={handleDrop}
           onDragOver={handleDragOver}
-        
         >
           <span className="mr-3 flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
